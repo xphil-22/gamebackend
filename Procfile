@@ -1,1 +1,1 @@
-web: gunicorn GameBackend.wsgi
+web: gunicorn GameBackend.wsgi --log-file -
