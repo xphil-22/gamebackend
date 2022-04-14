@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-m@jgmdq^iv8weub-stvagg)j!wmbyw2gxmz110a=oq^y3ph83j
 DEBUG = True
 LOCAL = False #To set the differences between Local Variables and Server Variables
 
-ALLOWED_HOSTS = ['127.0.0.1','GameBackend.herokuapp.com','GameBackend.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1','unitygamebackend.herokuapp.com']
 
 
 # Application definition
