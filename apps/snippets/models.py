@@ -5,7 +5,9 @@ from django.db import models
 class Snippet(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey('auth.User', related_name='snippets', on_delete=models.CASCADE)
-    data = models.JSONField(blank=True)
+    data = models.JSONField(blank=True, null=True)
+    highscore = models.IntegerField(blank=True, null=True)
+    
     
     class Meta:
         ordering = ['created']

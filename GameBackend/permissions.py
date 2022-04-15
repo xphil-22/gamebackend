@@ -21,7 +21,7 @@ class SnippetListPermission(permissions.BasePermission):
     def has_permission(self, request, view):
         if request.user.is_staff or request.method in self.SAFE_METHODS_SNIPPETLIST:
             return True
-        return True
+        return False
 
 class IsAdminOrCreator(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):

@@ -5,6 +5,12 @@ from rest_framework import status, mixins, generics
 from rest_framework.response import Response
 from GameBackend.permissions import IsAdminOrCreator, SnippetListPermission
 from rest_framework.authentication import SessionAuthentication, TokenAuthentication
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.permissions import IsAuthenticated
+from django.http import HttpResponse, HttpResponseBadRequest, JsonResponse
+from django.contrib.auth.models import User
+from django.shortcuts import get_object_or_404
+
 # Create your views here.
 
 class SnippetList(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
@@ -51,5 +57,22 @@ class SnippetDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, generics
 
 
     
+@api_view(['GET'])
+@permission_classes((IsAuthenticated, ))
+@authentication_classes((TokenAuthentication, SessionAuthentication))
+def game(request): #highscore view (function Based)
+    if request.GET.get('highscore') == "":
+        all_objects = Snippet.objects.all()
+        all_highscores = all_objects.values_list('owner', 'highscore').order_by('-highscore')
+        owner_rel_hs = []
+        for x in all_highscores:
+            owner_rel_hs.append([resolveUserId(x[0]), x[1]])
+        print(owner_rel_hs)
+        return Response({"data": owner_rel_hs})
     
+    else:
+        return HttpResponseBadRequest("Wrong keyword")
  
+ 
+def resolveUserId(id):
+    return str(get_object_or_404(User, pk=id))
