@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-m@jgmdq^iv8weub-stvagg)j!wmbyw2gxmz110a=oq^y3ph83j
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-LOCAL = False #To set the differences between Local Variables and Server Variables
+LOCAL = False #To set the differences between Local Procedures and Server Procedures
 
 ALLOWED_HOSTS = ['127.0.0.1','unitygamebackend.herokuapp.com']
 
@@ -99,10 +99,10 @@ DATABASES = {
     }
 }
 
-
-import dj_database_url
-db_from_env = dj_database_url.config(conn_max_age=600)
-DATABASES['default'].update(db_from_env)
+if not LOCAL:
+    import dj_database_url
+    db_from_env = dj_database_url.config(conn_max_age=600)
+    DATABASES['default'].update(db_from_env)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators

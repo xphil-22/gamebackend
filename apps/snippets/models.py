@@ -1,3 +1,4 @@
+from email.policy import default
 from django.db import models
 # Create your models here.
 
@@ -5,8 +6,8 @@ from django.db import models
 class Snippet(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     owner = models.ForeignKey('auth.User', related_name='snippets', on_delete=models.CASCADE)
-    data = models.JSONField(blank=True, null=True)
-    highscore = models.IntegerField(blank=True, null=True)
+    data = models.JSONField(blank=True, null=True, default="")
+    highscore = models.IntegerField(blank=True, null=True, default=0)
     
     
     class Meta:
