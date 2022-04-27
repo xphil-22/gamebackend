@@ -66,8 +66,9 @@ def game(request): #highscore view (function Based)
         all_highscores = all_objects.values_list('owner', 'highscore').order_by('-highscore')
         owner_rel_hs = []
         for x in all_highscores:
-            owner_rel_hs.append([resolveUserId(x[0]), x[1]])
-        print(owner_rel_hs)
+            if x[1] is not None:
+                owner_rel_hs.append([resolveUserId(x[0]), x[1]])
+       
         return Response({"data": owner_rel_hs})
     
     else:
