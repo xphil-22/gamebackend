@@ -65,7 +65,7 @@ def game(request): #highscore view (function Based)
         all_objects = Snippet.objects.all()
         all_highscores = all_objects.values_list('owner', 'highscore').order_by('-highscore')
         owner_rel_hs = []
-        for x in all_highscores[:10]:
+        for x in all_highscores[:5]:
             print(x)
             if x[1] is not None:
                 owner_rel_hs.append({"username": resolveUserId(x[0]), "highscore": x[1]})
